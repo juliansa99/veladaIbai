@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Velada del Año VI</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F0D080;
+    --gold-dim: #7A5F25;
+    --red: #CC2B2B;
+    --red-glow: #FF3D3D;
+    --dark: #0A0A0A;
+    --dark2: #111111;
+    --dark3: #1A1A1A;
+    --dark4: #232323;
+    --text: #F0EEE8;
+    --text-muted: #888;
+    --text-dim: #555;
+    --border: rgba(201,168,76,0.2);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    overflow: hidden;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 50% at 50% 100%, rgba(204,43,43,0.08) 0%, transparent 70%),
+                var(--dark);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 59px, rgba(255,255,255,0.018) 60px
+    ), repeating-linear-gradient(
+      90deg, transparent, transparent 59px, rgba(255,255,255,0.018) 60px
+    );
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    background: rgba(201,168,76,0.06);
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--red-glow);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--red-glow);
+    animation: blink 1.4s ease-in-out infinite;
+  }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 14vw, 11rem);
+    line-height: 0.88;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    text-shadow: 0 0 80px rgba(201,168,76,0.25);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title span {
+    display: block;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dim));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.2rem, 3vw, 2.2rem);
+    letter-spacing: 0.22em;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .hero-meta-item {
+    text-align: center;
+  }
+
+  .hero-meta-item .val {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .hero-meta-item .lbl {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .divider-v {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold);
+    color: #0A0A0A;
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .cta-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dim);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    animation: fadeDown 2s ease-in-out infinite;
+  }
+
+  @keyframes fadeDown { 0%,100%{opacity:0.4;transform:translateX(-50%) translateY(0)} 50%{opacity:1;transform:translateX(-50%) translateY(5px)} }
+
+  .scroll-hint svg { width: 16px; height: 16px; }
+
+  /* ===== NAV ===== */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ===== SECTIONS ===== */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-desc {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* ===== FIGHTS GRID ===== */
+  #combates {
+    background: var(--dark2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    max-width: 100%;
+  }
+
+  #combates > .inner { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+
+  .fights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 3rem;
+  }
+
+  .fight-card {
+    background: var(--dark3);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .fight-card:hover { background: var(--dark4); }
+
+  .fight-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .fight-card:hover::before { opacity: 1; }
+
+  .fight-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+  }
+
+  .fight-matchup {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .fighter-name {
+    flex: 1;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    color: var(--text);
+  }
+
+  .fighter-name .country {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  .vs-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    color: var(--red);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    padding: 4px 8px;
+    border: 1px solid rgba(204,43,43,0.3);
+    border-radius: 3px;
+  }
+
+  .fight-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .fight-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  .fight-tag.main { color: var(--gold); border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.06); }
+  .fight-tag.co-main { color: #8BB4E8; border-color: rgba(139,180,232,0.3); background: rgba(139,180,232,0.05); }
+  .fight-tag.debut { color: #A0D4A0; border-color: rgba(160,212,160,0.3); background: rgba(160,212,160,0.05); }
+  .fight-tag.historia { color: #E8C4A0; border-color: rgba(232,196,160,0.3); background: rgba(232,196,160,0.05); }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+    backdrop-filter: blur(6px);
+  }
+
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(20px);
+    transition: transform 0.25s;
+    position: relative;
+  }
+
+  .modal-overlay.open .modal {
+    transform: translateY(0);
+  }
+
+  .modal-header {
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .modal-fight-num {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  .modal-close {
+    width: 32px; height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .modal-close:hover { border-color: var(--gold); color: var(--gold); }
+
+  .modal-body {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 500px) { .modal-body { grid-template-columns: 1fr; } }
+
+  .fighter-card {
+    background: var(--dark4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .fighter-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .fighter-card .fc-role {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .fighter-card .fc-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .fighter-card .fc-country {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 1rem;
+  }
+
+  .fighter-card .fc-type {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+  }
+
+  .type-streamer { background: rgba(139,180,232,0.1); color: #8BB4E8; border: 1px solid rgba(139,180,232,0.2); }
+  .type-youtuber { background: rgba(255,80,80,0.1); color: #FF6666; border: 1px solid rgba(255,80,80,0.2); }
+  .type-musico { background: rgba(180,120,220,0.1); color: #C488E8; border: 1px solid rgba(180,120,220,0.2); }
+  .type-periodista { background: rgba(255,160,80,0.1); color: #FFAA55; border: 1px solid rgba(255,160,80,0.2); }
+  .type-influencer { background: rgba(160,212,160,0.1); color: #88D488; border: 1px solid rgba(160,212,160,0.2); }
+  .type-tiktoker { background: rgba(100,200,200,0.1); color: #66CCCC; border: 1px solid rgba(100,200,200,0.2); }
+  .type-deportista { background: rgba(255,200,80,0.1); color: #FFCC55; border: 1px solid rgba(255,200,80,0.2); }
+
+  .fc-stat {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .fc-stat:last-child { border-bottom: none; }
+  .fc-stat .key { color: var(--text-dim); }
+  .fc-stat .val { color: var(--text); font-weight: 500; }
+
+  .modal-context {
+    grid-column: 1 / -1;
+    background: rgba(201,168,76,0.05);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .modal-context h4 {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-context p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .modal-tags {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  /* ===== INFO SECTION ===== */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 3rem;
+  }
+
+  .info-item {
+    background: var(--dark3);
+    padding: 1.5rem;
+  }
+
+  .info-item .ii-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .info-item .ii-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .info-item .ii-key {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== HERO SOCIALS ===== */
+  .hero-socials {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 10px 18px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.04);
+    transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.15s;
+  }
+
+  .hero-social-link:hover { transform: translateY(-2px); }
+  .hero-social-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  .hero-social-link.twitch:hover  { color: #9B59FF; border-color: rgba(155,89,255,0.5); background: rgba(155,89,255,0.08); }
+  .hero-social-link.youtube:hover { color: #FF4444; border-color: rgba(255,68,68,0.5);  background: rgba(255,68,68,0.08); }
+  .hero-social-link.tiktok:hover  { color: #69C9D0; border-color: rgba(105,201,208,0.5); background: rgba(105,201,208,0.08); }
+
+  /* ===== HERO COUNTDOWN ===== */
+  .hero-countdown {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 1.5rem 0 2rem;
+    padding: 1rem 2rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(201,168,76,0.04);
+  }
+
+  .hcd-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 56px;
+  }
+
+  .hcd-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+  }
+
+  .hcd-lbl {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 3px;
+  }
+
+  .hcd-sep {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--text-dim);
+    padding-bottom: 14px;
+    line-height: 1;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+
+  footer span { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#hero">LA VELADA VI</a>
+  <ul class="nav-links">
+    <li><a href="#combates">Combates</a></li>
+    <li><a href="#info">Info</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+
+  <!-- REDES SOCIALES ARRIBA -->
+  <div class="hero-socials">
+    <a class="hero-social-link twitch" href="https://www.twitch.tv/ibai" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+      ibai
+    </a>
+    <a class="hero-social-link youtube" href="https://www.youtube.com/@IbaiLlanos" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+      IbaiLlanos
+    </a>
+    <a class="hero-social-link tiktok" href="https://www.tiktok.com/@ibai" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.26 8.26 0 0 0 4.83 1.55V6.79a4.85 4.85 0 0 1-1.06-.1z"/></svg>
+      @ibai
+    </a>
+  </div>
+
+  <div class="hero-badge">En vivo · 25 de julio de 2026</div>
+  <h1 class="hero-title">
+    La Velada
+    <span>del Año VI</span>
+  </h1>
+  <p class="hero-sub">Ibai Llanos · Estadio La Cartuja · Sevilla</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="val">10</span>
+      <span class="lbl">Combates</span>
+    </div>
+    <div class="divider-v"></div>
+    <div class="hero-meta-item">
+      <span class="val">20</span>
+      <span class="lbl">Boxeadores</span>
+    </div>
+    <div class="divider-v"></div>
+    <div class="hero-meta-item">
+      <span class="val">80.000</span>
+      <span class="lbl">Localidades</span>
+    </div>
+    <div class="divider-v"></div>
+    <div class="hero-meta-item">
+      <span class="val">20:00h</span>
+      <span class="lbl">Hora CET</span>
+    </div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="hero-countdown">
+    <div class="hcd-unit"><span class="hcd-val" id="cd-d">--</span><span class="hcd-lbl">días</span></div>
+    <span class="hcd-sep">:</span>
+    <div class="hcd-unit"><span class="hcd-val" id="cd-h">--</span><span class="hcd-lbl">horas</span></div>
+    <span class="hcd-sep">:</span>
+    <div class="hcd-unit"><span class="hcd-val" id="cd-m">--</span><span class="hcd-lbl">minutos</span></div>
+    <span class="hcd-sep">:</span>
+    <div class="hcd-unit"><span class="hcd-val" id="cd-s">--</span><span class="hcd-lbl">segundos</span></div>
+  </div>
+
+  <a class="cta-btn" href="#combates">Ver la cartelera →</a>
+  <div class="scroll-hint">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M4 9l4 4 4-4"/></svg>
+    Explorar
+  </div>
+</div>
+
+<!-- COMBATES -->
+<div id="combates">
+  <div class="inner">
+    <div class="section-label">Cartelera oficial</div>
+    <h2 class="section-title">Los 10 combates</h2>
+    <p class="section-desc">La edición más grande en la historia de La Velada. Haz clic en cada pelea para ver el perfil completo de ambos boxeadores.</p>
+
+    <div class="fights-grid" id="fights-grid"></div>
+  </div>
+</div>
+
+<!-- INFO -->
+<section id="info">
+  <div class="section-label">Sobre el evento</div>
+  <h2 class="section-title">La Velada del Año VI</h2>
+  <p class="section-desc">El evento de boxeo amateur más visto de la historia del streaming, organizado por Ibai Llanos, regresa con su edición más ambiciosa.</p>
+
+  <div class="info-grid">
+    <div class="info-item">
+      <span class="ii-icon">📅</span>
+      <div class="ii-val">25 JUL 2026</div>
+      <div class="ii-key">Fecha del evento</div>
+    </div>
+    <div class="info-item">
+      <span class="ii-icon">🏟️</span>
+      <div class="ii-val">La Cartuja</div>
+      <div class="ii-key">Estadio · Sevilla, España</div>
+    </div>
+    <div class="info-item">
+      <span class="ii-icon">📺</span>
+      <div class="ii-val">Gratis</div>
+      <div class="ii-key">Twitch · YouTube · TikTok</div>
+    </div>
+    <div class="info-item">
+      <span class="ii-icon">⚡</span>
+      <div class="ii-val">Doble</div>
+      <div class="ii-key">Main event (dos estelares)</div>
+    </div>
+    <div class="info-item">
+      <span class="ii-icon">🌍</span>
+      <div class="ii-val">7 Países</div>
+      <div class="ii-key">España, México, Argentina, Colombia, Venezuela, Puerto Rico, El Salvador</div>
+    </div>
+    <div class="info-item">
+      <span class="ii-icon">🎫</span>
+      <div class="ii-val">Sold Out</div>
+      <div class="ii-key">Agotado en menos de 2 horas</div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-fight-num" id="modal-fight-num"></div>
+        <div class="modal-title" id="modal-title"></div>
+      </div>
+      <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<footer>
+  <p>La Velada del Año VI · Organizada por <span>Ibai Llanos</span> · 25 de julio de 2026 · Sevilla</p>
+</footer>
+
+<script>
+const fights = [
+  {
+    id: 1,
+    num: "Combate 1",
+    tags: [],
+    tagLabels: [],
+    fighters: [
+      {
+        name: "Edu Aguirre",
+        country: "🇪🇸 España",
+        type: "periodista",
+        typeLabel: "Periodista deportivo",
+        desc: "Colaborador estrella de El Chiringuito de Jugones y conocido seguidor de Cristiano Ronaldo. Primera vez en La Velada.",
+        stats: [
+          { k: "Plataforma", v: "El Chiringuito (TV)" },
+          { k: "Debut", v: "Primera vez" },
+          { k: "Referente", v: "Cristiano Ronaldo" },
+        ]
+      },
+      {
+        name: "Gastón Edul",
+        country: "🇦🇷 Argentina",
+        type: "periodista",
+        typeLabel: "Periodista deportivo",
+        desc: "Reportero de ESPN Argentina, íntimo de Lionel Messi. La narrativa CR7 vs Messi llega al ring.",
+        stats: [
+          { k: "Plataforma", v: "ESPN Argentina" },
+          { k: "Debut", v: "Primera vez" },
+          { k: "Referente", v: "Lionel Messi" },
+        ]
+      }
+    ],
+    context: "El primer combate entre periodistas deportivos de la historia de La Velada. La rivalidad Cristiano Ronaldo vs Messi llega al ring con sus dos periodistas más icónicos. Ambas figuras deberán compaginar sus entrenamientos con la cobertura del Mundial de Fútbol 2026."
+  },
+  {
+    id: 2,
+    num: "Combate 2",
+    tags: [],
+    tagLabels: [],
+    fighters: [
+      {
+        name: "Fabiana Sevillano",
+        country: "🇪🇸 España",
+        type: "tiktoker",
+        typeLabel: "Tiktoker",
+        desc: "Tiktoker española con 1.9 millones de seguidores en TikTok. El drama previo: Juan Guarnizo, novio de La Parce, se bajó del evento.",
+        stats: [
+          { k: "Seguidores TikTok", v: "1.9M" },
+          { k: "Debut", v: "Primera vez" },
+          { k: "País", v: "España" },
+        ]
+      },
+      {
+        name: "La Parce",
+        country: "🇨🇴 Colombia",
+        type: "streamer",
+        typeLabel: "Streamer",
+        desc: "Valeria, conocida como La Parce, streamer colombiana popular en Call of Duty y Minecraft en Twitch.",
+        stats: [
+          { k: "Plataforma", v: "Twitch" },
+          { k: "Juegos", v: "CoD, Minecraft" },
+          { k: "Debut", v: "Primera vez" },
+        ]
+      }
+    ],
+    context: "Primer combate femenino de la noche. Con drama incorporado: Juan Guarnizo, novio de Valeria 'La Parce', se retiró del evento, lo que tensó la narrativa entre ambas participantes."
+  },
+  {
+    id: 3,
+    num: "Combate 3",
+    tags: [],
+    tagLabels: [],
+    fighters: [
+      {
+        name: "Kidd Keo",
+        country: "🇪🇸 España",
+        type: "musico",
+        typeLabel: "Artista musical",
+        desc: "Uno de los máximos exponentes del rap español, originario de Alicante. Lleva entrenando boxeo más de un año.",
+        stats: [
+          { k: "Género", v: "Rap / Trap" },
+          { k: "Preparación", v: "Más de 1 año" },
+          { k: "Debut", v: "Primera vez" },
+        ]
+      },
+      {
+        name: "Lit Killah",
+        country: "🇦🇷 Argentina",
+        type: "musico",
+        typeLabel: "Artista musical",
+        desc: "Referente del trap argentino, expareja de Tuli Acosta. Comenzó a entrenar recientemente pero mostró actitud combativa en el careo.",
+        stats: [
+          { k: "Género", v: "Trap / Hip-Hop" },
+          { k: "Preparación", v: "Reciente" },
+          { k: "Debut", v: "Primera vez" },
+        ]
+      }
+    ],
+    context: "El primer combate entre músicos en la historia de La Velada. Lit Killah exclamó en el careo: 'Lo miro y digo… ¡pobrecito!', lo que calentó los ánimos. Kidd Keo respondió afirmando ser de Alicante como ventaja psicológica. Aún debaten el peso acordado (Keo 70 kg, Killah 78 kg)."
+  },
+  {
+    id: 4,
+    num: "Combate 4",
+    tags: [],
+    tagLabels: [],
+    fighters: [
+      {
+        name: "Alondrissa",
+        country: "🇵🇷 Puerto Rico",
+        type: "streamer",
+        typeLabel: "Streamer",
+        desc: "Alondra, conocida como Alondrissa, creadora de contenido puertorriqueña. Entrena desde diciembre 2025.",
+        stats: [
+          { k: "País", v: "Puerto Rico" },
+          { k: "Entrenamiento", v: "Desde dic 2025" },
+          { k: "Debut", v: "Primera vez" },
+        ]
+      },
+      {
+        name: "Angie Velasco",
+        country: "🇦🇷 Argentina",
+        type: "youtuber",
+        typeLabel: "Youtuber",
+        desc: "Youtuber argentina con más de 6 millones de suscriptores. Entrena desde noviembre 2025. Amiga de Alondrissa.",
+        stats: [
+          { k: "Suscriptores YouTube", v: "+6M" },
+          { k: "Entrenamiento", v: "Desde nov 2025" },
+          { k: "Debut", v: "Primera vez" },
+        ]
+      }
+    ],
+    context: "El combate de dos amigas, que competirán pese a su amistad de años. Es el primer enfrentamiento sin representación local, con Puerto Rico vs Argentina. Ambas partían de un estilo de vida sedentario pero llegaron a La Velada con meses de preparación."
+  },
+  {
+    id: 5,
+    num: "Combate 5",
+    tags: [],
+    tagLabels: [],
+    fighters: [
+      {
+        name: "Clersss",
+        country: "🇪🇸 España",
+        type: "streamer",
+        typeLabel: "Streamer / Tiktoker",
+        desc: "Streamer española cuyo canal y presencia en TikTok experimentaron un gran crecimiento en 2025.",
+        stats: [
+          { k: "Plataforma", v: "TikTok / Streaming" },
+          { k: "TikTok", v: "+1.2M" },
+          { k: "Debut", v: "Primera vez" },
+        ]
+      },
+      {
+        name: "Natalia MX",
+        country: "🇲🇽 México",
+        type: "influencer",
+        typeLabel: "Influencer",
+        desc: "Presidenta de Club de Cuervos México y representante digital mexicana con gran comunidad en TikTok.",
+        stats: [
+          { k: "País", v: "México" },
+          { k: "Comunidad combinada", v: "+2.4M TikTok" },
+          { k: "Debut", v: "Primera vez" },
+        ]
+      }
+    ],
+    context: "España vs México en el ring. Ambas suman una comunidad digital superior a 2.4 millones en TikTok. El combate añade diversidad continental al cartel y fue una de las peleas revelación de la presentación."
+  },
+  {
+    id: 6,
+    num: "Combate 6",
+    tags: [],
+    tagLabels: [],
+    fighters: [
+      {
+        name: "ByViruzz",
+        country: "🇪🇸 España",
+        type: "youtuber",
+        typeLabel: "Youtuber / Streamer",
+        desc: "El peleador con mayor trayectoria en La Velada (5 ediciones). Ha peleado en casi todas las veladas. Actualmente pesa 88 kg y debe bajar a ~78 kg.",
+        stats: [
+          { k: "Ediciones previas", v: "Veladas I-V" },
+          { k: "Peso actual", v: "~88 kg" },
+          { k: "Récord en Velada", v: "Invicto histórico" },
+        ]
+      },
+      {
+        name: "Gero Arias",
+        country: "🇦🇷 Argentina",
+        type: "deportista",
+        typeLabel: "Influencer / Boxeador amateur",
+        desc: "Campeón de Párense de Manos III, donde derrotó a Tomás Mazza. Planea clasificarse a los Juegos Olímpicos 2028. El rival más peligroso que ha tenido Viruzz.",
+        stats: [
+          { k: "Categoría", v: "Boxeador amateur" },
+          { k: "Logro", v: "Campeón Párense de Manos III" },
+          { k: "Meta", v: "JJOO 2028" },
+        ]
+      }
+    ],
+    context: "Sin Viruzz no hay Velada, pero en esta edición podría perder su invicto. Gero Arias es boxeador amateur real que ganó el torneo Párense de Manos III. El peso acordado es de ~78 kg, por lo que Viruzz deberá bajar casi 10 kilos."
+  },
+  {
+    id: 7,
+    num: "Combate 7",
+    tags: [],
+    tagLabels: [],
+    fighters: [
+      {
+        name: "Samy Rivers",
+        country: "🇲🇽 México",
+        type: "youtuber",
+        typeLabel: "Youtuber / Streamer",
+        desc: "Veterana de La Velada 3 donde perdió contra Marina Rivers. Regresa con experiencia y ganas de reivindicarse.",
+        stats: [
+          { k: "Ediciones previas", v: "Veladas III, V" },
+          { k: "Historial", v: "1V 1D" },
+          { k: "País", v: "México" },
+        ]
+      },
+      {
+        name: "Roro",
+        country: "🇪🇸 España",
+        type: "tiktoker",
+        typeLabel: "Tiktoker",
+        desc: "Tiktoker e influencer española. En La Velada 5 perdió contra Abby tras sufrir un esguince en plena pelea. Regresa para reivindicarse.",
+        stats: [
+          { k: "Ediciones previas", v: "Velada V" },
+          { k: "Historial", v: "0V 1D (lesión)" },
+          { k: "País", v: "España" },
+        ]
+      }
+    ],
+    context: "Las dos quieren reivindicarse: Samy Rivers busca revertir su derrota anterior y Roro vuelve tras la lesión que le costó el combate en la edición anterior. Las estelares suman más de 1.6 millones de seguidores combinados y prometen un combate de alto voltaje."
+  },
+  {
+    id: 8,
+    num: "Combate 8 · Co-estelar",
+    tags: ["co-main"],
+    tagLabels: ["Co-estelar"],
+    fighters: [
+      {
+        name: "Marta Díaz",
+        country: "🇪🇸 España",
+        type: "influencer",
+        typeLabel: "Influencer / Creadora",
+        desc: "Referente histórica de la creación de contenido en España. Primera vez sobre el ring. Una de las figuras con mayor impacto en redes del país.",
+        stats: [
+          { k: "Perfil", v: "Modelo e influencer" },
+          { k: "Debut", v: "Primera vez en Velada" },
+          { k: "País", v: "España" },
+        ]
+      },
+      {
+        name: "Tatiana Kaer",
+        country: "🇪🇸 España",
+        type: "influencer",
+        typeLabel: "Modelo / Influencer",
+        desc: "Modelo e influencer española que entra por primera vez al mundo del boxeo en La Velada VI.",
+        stats: [
+          { k: "Perfil", v: "Modelo e influencer" },
+          { k: "Debut", v: "Primera vez en Velada" },
+          { k: "País", v: "España" },
+        ]
+      }
+    ],
+    context: "Uno de los tres combates que forman parte de la cartelera principal. Marta Díaz debuta en el ring como uno de los nombres más reconocidos de la escena digital española. Es el primer combate de boxeo de ambas participantes."
+  },
+  {
+    id: 9,
+    num: "Combate 9 · Co-estelar",
+    tags: ["co-main"],
+    tagLabels: ["Co-estelar"],
+    fighters: [
+      {
+        name: "Fernanfloo",
+        country: "🇸🇻 El Salvador",
+        type: "youtuber",
+        typeLabel: "Youtuber",
+        desc: "Youtuber salvadoreño y veterano de La Velada. Llega invicto a esta edición. Su récord no admite derrota hasta ahora.",
+        stats: [
+          { k: "Ediciones previas", v: "Veladas anteriores" },
+          { k: "Récord en Velada", v: "Invicto" },
+          { k: "País", v: "El Salvador" },
+        ]
+      },
+      {
+        name: "YoSoy Plex",
+        country: "🇪🇸 España",
+        type: "youtuber",
+        typeLabel: "Youtuber / Streamer",
+        desc: "Youtuber y streamer español conocido como Plex. También llega invicto. Uno de los dos perderá esa condición en Sevilla.",
+        stats: [
+          { k: "Ediciones previas", v: "Veladas anteriores" },
+          { k: "Récord en Velada", v: "Invicto" },
+          { k: "País", v: "España" },
+        ]
+      }
+    ],
+    context: "El choque de los dos invictos. Fernanfloo y Plex repiten en La Velada, ambos sin perder nunca. Uno de los dos dejará su récord sin mancha atrás en el estadio de La Cartuja. El combate promete ser altamente competitivo."
+  },
+  {
+    id: 10,
+    num: "Combate 10 · Estelar",
+    tags: ["main"],
+    tagLabels: ["Main event"],
+    fighters: [
+      {
+        name: "IlloJuan",
+        country: "🇪🇸 España",
+        type: "streamer",
+        typeLabel: "Streamer / Youtuber",
+        desc: "Uno de los streamers más influyentes de España. Debuta en La Velada tras años de rumores. Ha ganado musculatura para prepararse. Peso acordado: 67 kg (debe bajar).",
+        stats: [
+          { k: "Plataforma", v: "Twitch / YouTube" },
+          { k: "Debut", v: "Primera vez en Velada" },
+          { k: "Peso acordado", v: "67 kg" },
+        ]
+      },
+      {
+        name: "The Grefg",
+        country: "🇪🇸 España",
+        type: "streamer",
+        typeLabel: "Streamer",
+        desc: "Uno de los creadores de contenido más seguidos en español. En La Velada V venció al colombiano Westcol. Peso acordado: 67 kg (debe subir).",
+        stats: [
+          { k: "Plataforma", v: "Twitch / YouTube" },
+          { k: "Ediciones previas", v: "Velada V (victoria)" },
+          { k: "Peso acordado", v: "67 kg" },
+        ]
+      }
+    ],
+    context: "El main event más esperado en la historia de La Velada. Dos de los mayores creadores de contenido en español por fin se suben al ring. IlloJuan debuta tras años de especulación y The Grefg regresa tras su victoria en La Velada V. Ambos pesan a 67 kg. Las 80.000 entradas se agotaron en menos de 2 horas."
+  }
+];
+
+function renderFights() {
+  const grid = document.getElementById('fights-grid');
+  fights.forEach(f => {
+    const card = document.createElement('div');
+    card.className = 'fight-card';
+    card.onclick = () => openModal(f.id);
+    const tagsHtml = f.tags.map((t,i) => `<span class="fight-tag ${t}">${f.tagLabels[i]}</span>`).join('');
+    card.innerHTML = `
+      <div class="fight-number">${f.num}</div>
+      <div class="fight-matchup">
+        <div class="fighter-name">${f.fighters[0].name}<span class="country">${f.fighters[0].country}</span></div>
+        <div class="vs-badge">VS</div>
+        <div class="fighter-name" style="text-align:right">${f.fighters[1].name}<span class="country">${f.fighters[1].country}</span></div>
+      </div>
+      ${tagsHtml ? `<div class="fight-meta">${tagsHtml}</div>` : ''}
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function openModal(id) {
+  const f = fights.find(x => x.id === id);
+  if (!f) return;
+  document.getElementById('modal-fight-num').textContent = f.num;
+  document.getElementById('modal-title').textContent = `${f.fighters[0].name} vs ${f.fighters[1].name}`;
+  const allTags = f.tags.map((t,i) => `<span class="fight-tag ${t}">${f.tagLabels[i]}</span>`).join('');
+  const body = document.getElementById('modal-body');
+  body.innerHTML = `
+    ${allTags ? `<div class="modal-tags">${allTags}</div>` : ''}
+    ${f.fighters.map(fi => `
+      <div class="fighter-card">
+        <div class="fc-role">Boxeador</div>
+        <div class="fc-name">${fi.name}</div>
+        <div class="fc-country">${fi.country}</div>
+        <span class="fc-type type-${fi.type}">${fi.typeLabel}</span>
+        <p style="font-size:13px;line-height:1.65;color:var(--text-muted);margin-bottom:1rem">${fi.desc}</p>
+        ${fi.stats.map(s => `<div class="fc-stat"><span class="key">${s.k}</span><span class="val">${s.v}</span></div>`).join('')}
+      </div>
+    `).join('')}
+    <div class="modal-context">
+      <h4>Contexto del combate</h4>
+      <p>${f.context}</p>
+    </div>
+  `;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModalBtn();
+}
+
+function closeModalBtn() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalBtn(); });
+
+function updateCountdown() {
+  const target = new Date('2026-07-25T20:00:00+02:00').getTime();
+  const now = Date.now();
+  const diff = target - now;
+  if (diff <= 0) {
+    ['cd-d','cd-h','cd-m','cd-s'].forEach(id => document.getElementById(id).textContent = '00');
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+renderFights();
+</script>
+</body>
+</html>
